@@ -1,10 +1,17 @@
 import React from "react";
 
-import { Avatar, Box, IconButton, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import DobuleSeenIcon from "../assets/dobuleSeen";
 import { IChat } from "../data/type";
 import { useDispatch } from "react-redux";
-import { changeChatConv } from "../redux/chatReducer";
+import { changeChatConv, goToChat } from "../redux/chatReducer";
 interface UserCardItemProps {
   user: IChat;
 }
@@ -15,10 +22,16 @@ const UserCardItem: React.FC<UserCardItemProps> = ({ user }) => {
   const hours = date.getHours();
   const minutes = date.getMinutes();
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  console.log();
 
   return (
     <Box
-      onClick={() => dispatch(changeChatConv(user))}
+      onClick={() => {
+        dispatch(changeChatConv(user));
+        !matches && dispatch(goToChat());
+      }}
       py={"2px"}
       px={2}
       sx={{

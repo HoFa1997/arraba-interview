@@ -10,6 +10,7 @@ const sortData = [
 const ChatSidebar: React.FC = () => {
   return (
     <Box
+      position={"relative"}
       py={3}
       width={340}
       sx={{ height: "100vh" }}

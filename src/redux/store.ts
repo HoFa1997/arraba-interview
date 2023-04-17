@@ -3,7 +3,7 @@ import chatSlice from "./chatReducer";
 
 export const store = configureStore({
   reducer: {
-    chat: chatSlice,
+    chatState: chatSlice,
   },
 });
 

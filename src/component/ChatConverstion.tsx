@@ -14,6 +14,9 @@ import {
 import React from "react";
 import { IChat } from "../data/type";
 import AttachIcon from "../assets/attachIcon";
+import { useDispatch } from "react-redux";
+import { BackFromChat } from "../redux/chatReducer";
+import BackIcon from "../assets/backIcon";
 
 interface ChatConversationProps {
   user: IChat;
@@ -92,7 +95,7 @@ const SenderCard: React.FC<{ text: string; clock: string; img: string }> = ({
 
 const ChatConversation: React.FC<ChatConversationProps> = ({ user }) => {
   const heightToolbar = 61;
-
+  const dispatch = useDispatch();
   const receiverData = {
     id: user.participants[0].id,
     img: user.participants[0].img,
@@ -111,7 +114,7 @@ const ChatConversation: React.FC<ChatConversationProps> = ({ user }) => {
       <Avatar sx={{ ml: 2, width: 42, height: 42 }}>
         <img src={user.participants[0].img} />
       </Avatar>
-      <Box pl={1}>
+      <Box pl={1} flexGrow={1}>
         <Typography
           sx={{
             fontStyle: "normal",
@@ -134,6 +137,9 @@ const ChatConversation: React.FC<ChatConversationProps> = ({ user }) => {
           Online
         </Typography>
       </Box>
+      <IconButton sx={{ mr: 1 }} onClick={() => dispatch(BackFromChat())}>
+        <BackIcon />
+      </IconButton>
     </Box>
   );
 
@@ -152,8 +158,8 @@ const ChatConversation: React.FC<ChatConversationProps> = ({ user }) => {
         <AttachIcon />
       </IconButton>
       <BootstrapInput fullWidth placeholder="Type your message here.." />
-      <Button variant="text" sx={{ color: "#27AE60", minWidth: 180 }}>
-        <Typography noWrap>Send message</Typography>
+      <Button variant="text" sx={{ color: "#27AE60", minWidth: 80 }}>
+        <Typography noWrap>Send</Typography>
       </Button>
     </Box>
   );

@@ -3,12 +3,19 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { IChat } from "../data/type";
 import { userData } from "../data/user";
 
+export enum appMode {
+  noChat = "NoChat",
+  onChat = "OnChat",
+}
+
 export interface ChatState {
   chat: IChat;
+  appMode: appMode;
 }
 
 const initialState: ChatState = {
   chat: userData[0],
+  appMode: appMode.noChat,
 };
 
 export const chatSlice = createSlice({
@@ -18,16 +25,16 @@ export const chatSlice = createSlice({
     changeChatConv: (state, action: PayloadAction<IChat>) => {
       state.chat = action.payload;
     },
-    // decrement: (state) => {
-    //   state.value -= 1;
-    // },
-    // incrementByAmount: (state, action: PayloadAction<number>) => {
-    //   state.value += action.payload;
-    // },
+    goToChat: (state) => {
+      state.appMode = appMode.onChat;
+    },
+    BackFromChat: (state) => {
+      state.appMode = appMode.noChat;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { changeChatConv } = chatSlice.actions;
+export const { changeChatConv, goToChat, BackFromChat } = chatSlice.actions;
 
 export default chatSlice.reducer;
