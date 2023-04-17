@@ -1,7 +1,18 @@
-export interface IUser {
+export interface IChat {
+  participants: Participant[];
+  messages: Message[];
+}
+
+interface Message {
+  sender: string;
+  receiver: string;
+  text: string;
+  timestamp: string;
+}
+
+interface Participant {
   img: string;
   name: string;
-  lastChat: string;
-  clock: string;
-  seen: boolean;
+  id: string;
+  lastSeen: string;
 }

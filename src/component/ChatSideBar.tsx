@@ -11,8 +11,8 @@ const ChatSidebar: React.FC = () => {
   return (
     <Box
       py={3}
-      minHeight={"100vh"}
       width={340}
+      sx={{ height: "100vh" }}
       borderRight={"solid 1px rgba(0,0,0,0.1)"}
     >
       <Box mx={2}>
@@ -37,8 +37,9 @@ const ChatSidebar: React.FC = () => {
         </Box>
       </Box>
       <Box>
-        {userData.map((user) => (
-          <UserCardItem key={user.name} user={user} />
+        {/* here we need uniq ID for key but dont have i use index */}
+        {userData.map((user, index) => (
+          <UserCardItem key={index} user={user} />
         ))}
       </Box>
     </Box>
